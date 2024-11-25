@@ -52,4 +52,9 @@ public class EmployeeController {
         return employeeRepository.update(id, employee);
     }
 
+    @GetMapping(params = {"page", "size"})
+    public List<Employee> pagination(@RequestParam("page") int page, @RequestParam("size") int size) {
+        return employeeRepository.pagination(page, size);
+    }
+
 }

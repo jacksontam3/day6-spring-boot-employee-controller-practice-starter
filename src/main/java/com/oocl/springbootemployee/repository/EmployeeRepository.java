@@ -2,7 +2,6 @@ package com.oocl.springbootemployee.repository;
 
 import com.oocl.springbootemployee.entity.Employee;
 import com.oocl.springbootemployee.entity.Gender;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class EmployeeRepository {
 
 
     public Employee save(Employee employee) {
-        employee.setId((Long) (employees.size() + 1L));
+        employee.setId(employees.size() + 1L);
         employees.add(employee);
         return employee;
     }
@@ -52,5 +51,11 @@ public class EmployeeRepository {
         byId.setAge(employee.getAge());
         byId.setSalary(employee.getSalary());
         return byId;
+    }
+
+    public List<Employee> pagination(int page, int size) {
+        return getAll().stream()
+                .skip((page - 1L) * size).limit(size)
+                .toList();
     }
 }
