@@ -21,7 +21,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -30,16 +30,16 @@ public class EmployeeControllerTest {
 
     private static final Logger log = LoggerFactory.getLogger(EmployeeControllerTest.class);
     @Autowired
+    public JacksonTester<Employee> json;
+    @Autowired
     private MockMvc client;
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
-    public JacksonTester<Employee> json;
-    @Autowired
     private JacksonTester<List<Employee>> listJson;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         employeeRepository.getAll().clear();
         employeeRepository.save(new Employee(1L, "Jackson", 18, Gender.FEMALE, 90000.0));
         employeeRepository.save(new Employee(2L, "Don", 18, Gender.MALE, 50000.0));
@@ -161,7 +161,7 @@ public class EmployeeControllerTest {
 
         String content = "{\n" +
                 "    \"name\": \"" + employee.getName() + "\",\n" +
-                "    \"age\": " +  newAge +",\n" +
+                "    \"age\": " + newAge + ",\n" +
                 "    \"gender\": \"" + employee.getGender() + "\",\n" +
                 "    \"salary\": " + newSalary + "\n" +
                 "}";
