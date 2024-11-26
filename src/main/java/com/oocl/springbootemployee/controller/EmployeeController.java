@@ -53,7 +53,7 @@ public class EmployeeController {
     }
 
     @GetMapping(params = {"page", "size"})
-    public List<Employee> pagination(@RequestParam("page") int page, @RequestParam("size") int size) {
+    public List<Employee> pagination(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
         return employeeRepository.pagination(page, size);
     }
 
